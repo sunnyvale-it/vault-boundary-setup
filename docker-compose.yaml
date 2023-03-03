@@ -110,7 +110,7 @@ services:
       - vault
 
   volumes:
-    vault-data:
+    vault-data: {}
 
 networks:
   vault-network:
