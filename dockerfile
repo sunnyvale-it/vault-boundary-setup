@@ -6,4 +6,5 @@ RUN apt-get update && apt-get install -y software-properties-common curl gnupg2 
   vault && \
   setcap cap_ipc_lock= /usr/bin/vault
 COPY run.sh ./
+COPY boundary.hcl ./
 CMD ./run.sh
