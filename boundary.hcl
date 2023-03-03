@@ -41,6 +41,9 @@ listener "tcp" {
 // Yoy can generate the keys by 
 // `python3 kyegen.py`
 // Ref: https://www.boundaryproject.io/docs/configuration/kms/aead
+
+# Root KMS configuration block: this is the root key for Boundary
+# Use a production KMS such as AWS KMS in production installs
 kms "aead" {
   purpose = "root"
   aead_type = "aes-gcm"
@@ -48,6 +51,9 @@ kms "aead" {
   key_id = "global_root"
 }
 
+# Worker authorization KMS
+# Use a production KMS such as AWS KMS for production installs
+# This key is the same key used in the worker configuration
 kms "aead" {
   purpose = "worker-auth"
   aead_type = "aes-gcm"
@@ -55,9 +61,19 @@ kms "aead" {
   key_id = "global_worker-auth"
 }
 
+# Recovery KMS block: configures the recovery key for Boundary
+# Use a production KMS such as AWS KMS for production installs
 kms "aead" {
   purpose = "recovery"
   aead_type = "aes-gcm"
   key = "8fZBjCUfN0TzjEGLQldGY4+iE9AkOvCfjh7+p0GtRBQ="
   key_id = "global_recovery"
+}
+
+# Configuration encryption block: decrypts sensitive values in the
+# configuration file. See `boundary config [encrypt|decrypt] -h`.
+kms "aead" {
+  purpose   = "config"`
+  aead_type = "aes-gcm"
+  key       = "7xtkEoS5EXPbgynwd+dDLHopaCqK8cq0Rpep4eooaTs="
 }
