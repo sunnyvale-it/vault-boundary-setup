@@ -109,8 +109,8 @@ services:
     depends_on:
       - vault
 
-  volumes:
-    vault-data:
+volumes:
+  vault-data:
 
 networks:
   vault-network:
