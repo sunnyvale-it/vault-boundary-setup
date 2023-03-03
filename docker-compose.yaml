@@ -57,8 +57,8 @@ services:
     image: busybox:latest
     command: ["sleep", "1"]
     depends_on:
-      boundary:
-        condition: service_healthy
+      - boundary:
+          condition: service_healthy
 
 # Private Database Targets - not exposed to host network, only available via Boundary
   cassandra:
