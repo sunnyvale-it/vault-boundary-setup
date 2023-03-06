@@ -116,4 +116,4 @@ networks:
   vault-network:
     ipam:
       config:
-        - subnet: 172.21.0.0/24
+        - subnet: 172.21.21.0/24
